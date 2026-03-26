@@ -10,49 +10,48 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "show and query are required" }, { status: 400 });
   }
 
-  const prompt = `You are an expert on TV shows. The user is looking for episodes of "${show}" that match this description: "${query}"
+  const prompt = `You are an expert on children's TV. A parent is trying to find an episode of "${show}" based on this description from their toddler: "${query}"
 
-Return up to 3 matching episodes as a JSON array. Each episode must have:
+Return up to 3 matching episodes as a JSON array. Each episode must have exactly these fields:
 - season (number)
 - episode (number)
-- title (string)
-- description (string, 1-2 sentences)
-- reason (string, why this episode matches — 1 sentence, italic-worthy)
+- name (string — episode title)
+- overview (string — one sentence description of what happens)
+- reason (string — one sentence explaining why this matches what the parent described)
 
-Respond ONLY with valid JSON. Example format:
-[
-  {
-    "season": 2,
-    "episode": 11,
-    "title": "Episode Title",
-    "description": "Brief description of what happens.",
-    "reason": "This episode directly deals with the theme you described."
-  }
-]
+Return raw JSON only. No markdown, no preamble, no explanation. Just the JSON array.
 
-If no episodes match, return an empty array [].`;
+Example:
+[{"season":1,"episode":4,"name":"Pups Make a Splash","overview":"The pups rescue a beached whale.","reason":"This episode features a large sea creature, which matches the description."}]
 
-  const message = await client.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: prompt }],
-  });
+If no episodes match, return [].`;
 
-  const text = message.content[0].type === "text" ? message.content[0].text : "";
-
-  let episodes = [];
   try {
-    episodes = JSON.parse(text);
-  } catch {
-    const match = text.match(/\[[\s\S]*\]/);
-    if (match) {
-      try {
-        episodes = JSON.parse(match[0]);
-      } catch {
-        episodes = [];
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1024,
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    const text = message.content[0].type === "text" ? message.content[0].text : "";
+
+    let episodes = [];
+    try {
+      episodes = JSON.parse(text);
+    } catch {
+      const match = text.match(/\[[\s\S]*\]/);
+      if (match) {
+        try {
+          episodes = JSON.parse(match[0]);
+        } catch {
+          episodes = [];
+        }
       }
     }
-  }
 
-  return NextResponse.json({ episodes });
+    return NextResponse.json({ episodes });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

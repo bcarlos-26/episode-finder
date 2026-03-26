@@ -9,8 +9,8 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 interface Episode {
   season: number;
   episode: number;
-  title: string;
-  description: string;
+  name: string;
+  overview: string;
   reason: string;
 }
 
@@ -33,9 +33,10 @@ export default function Home() {
         body: JSON.stringify({ show: selectedShow, query }),
       });
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
       setEpisodes(data.episodes ?? []);
-    } catch {
-      setError("Something went wrong. Try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -54,9 +55,10 @@ export default function Home() {
         body: JSON.stringify({ show: selectedShow }),
       });
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
       setEpisodes(data.episode ? [data.episode] : []);
-    } catch {
-      setError("Something went wrong. Try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -69,24 +71,24 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] py-16 px-4">
-      <div className="max-w-2xl mx-auto flex flex-col gap-10">
+    <div className="min-h-screen flex flex-col" style={{ background: "#FAF6EE" }}>
+      <main className="flex-1 w-full max-w-lg mx-auto px-4 pt-12 pb-8 flex flex-col gap-8">
         {/* Header */}
         <div>
           <h1
-            className="text-4xl font-semibold text-gray-900 mb-2"
-            style={{ fontFamily: "var(--font-fraunces)" }}
+            className="text-3xl font-semibold mb-1"
+            style={{ fontFamily: "var(--font-fraunces)", color: "#1A1208" }}
           >
-            Episode Finder
+            What Are We Watching?
           </h1>
-          <p className="text-sm text-gray-500">
-            Describe a moment or mood — we&apos;ll find the episode.
+          <p className="text-sm" style={{ color: "#7A6040" }}>
+            Describe the episode your kid is asking for — we&apos;ll find it.
           </p>
         </div>
 
         {/* Show picker */}
         <section>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#9B7D52" }}>
             Pick a show
           </p>
           <ShowGrid selected={selectedShow} onSelect={handleShowSelect} />
@@ -94,8 +96,8 @@ export default function Home() {
 
         {/* Search */}
         <section>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">
-            What are you looking for?
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#9B7D52" }}>
+            What do you remember?
           </p>
           <SearchBar
             disabled={!selectedShow}
@@ -105,18 +107,33 @@ export default function Home() {
           />
         </section>
 
-        {/* Results */}
+        {/* Loading */}
         {loading && <LoadingSpinner />}
-        {error && <p className="text-sm text-red-500">{error}</p>}
+
+        {/* Error */}
+        {error && (
+          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3">
+            <p className="text-sm text-red-700">{error}</p>
+          </div>
+        )}
+
+        {/* Results */}
         {episodes !== null && !loading && (
           <section>
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">
-              {episodes.length > 0 ? "Results" : "No results"}
+            <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#9B7D52" }}>
+              {episodes.length > 0 ? `${episodes.length} match${episodes.length > 1 ? "es" : ""}` : "No matches"}
             </p>
             <EpisodeResults episodes={episodes} />
           </section>
         )}
-      </div>
-    </main>
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full max-w-lg mx-auto px-4 py-6 border-t" style={{ borderColor: "#EDE5D8" }}>
+        <p className="text-xs text-center" style={{ color: "#9B7D52" }}>
+          This product uses the TMDB API but is not endorsed or certified by TMDB.
+        </p>
+      </footer>
+    </div>
   );
 }
