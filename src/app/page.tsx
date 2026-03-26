@@ -81,14 +81,14 @@ export default function Home() {
           >
             That One Episode
           </h1>
-          <p className="text-sm text-white/70">
+          <p className="text-white/70" style={{ fontSize: "1.05rem" }}>
             Describe the episode your kid is asking for, the way they&apos;re asking for it, and we&apos;ll find it for you.
           </p>
         </div>
 
         {/* Show picker */}
         <section>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/60">
+          <p className="font-semibold uppercase tracking-widest mb-3 text-white/60" style={{ fontSize: "0.9rem" }}>
             Pick a show
           </p>
           <ShowGrid selected={selectedShow} onSelect={handleShowSelect} />
@@ -96,7 +96,7 @@ export default function Home() {
 
         {/* Search */}
         <section>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/60">
+          <p className="font-semibold uppercase tracking-widest mb-3 text-white/60" style={{ fontSize: "0.9rem" }}>
             How does your kid describe the episode?
           </p>
           <SearchBar
@@ -130,8 +130,8 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="relative z-10 w-full max-w-lg mx-auto px-4 py-6 border-t border-white/10">
-        <p className="text-xs text-center text-white/25">
-          This app was designed by Leo&apos;s Dad for the parents and children of the Little Campus
+        <p className="text-center text-white/25" style={{ fontSize: "0.9rem" }}>
+          This app was designed by Leo&apos;s Dad for the parents and children of The Little Campus
         </p>
       </footer>
     </div>
