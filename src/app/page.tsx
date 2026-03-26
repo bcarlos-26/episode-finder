@@ -79,7 +79,7 @@ export default function Home() {
             className="text-3xl font-semibold mb-1"
             style={{ fontFamily: "var(--font-fraunces)", color: "#1A1208" }}
           >
-            What Are We Watching?
+            That One Episode
           </h1>
           <p className="text-sm" style={{ color: "#7A6040" }}>
             Describe the episode your kid is asking for — we&apos;ll find it.

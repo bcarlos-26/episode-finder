@@ -15,8 +15,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Episode Finder",
-  description: "Find the perfect episode of your favourite show",
+  title: "That One Episode",
+  description: "Find the episode your kid is asking for",
 };
 
 export default function RootLayout({
