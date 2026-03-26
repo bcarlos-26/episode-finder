@@ -5,11 +5,10 @@ const SHOWS = [
   { name: "Bluey", emoji: "🐶" },
   { name: "Peppa Pig", emoji: "🐷" },
   { name: "Daniel Tiger's Neighborhood", emoji: "🐯" },
-  { name: "Hey Duggee", emoji: "🦮" },
-  { name: "Octonauts", emoji: "🐙" },
   { name: "Sesame Street", emoji: "🎭" },
-  { name: "Curious George", emoji: "🐒" },
-  { name: "Dora the Explorer", emoji: "🗺️" },
+  { name: "Trash Truck", emoji: "🚛" },
+  { name: "Llama Llama", emoji: "🦙" },
+  { name: "Hello Kitty and Friends", emoji: "🎀" },
 ];
 
 interface ShowGridProps {
@@ -19,7 +18,7 @@ interface ShowGridProps {
 
 export default function ShowGrid({ selected, onSelect }: ShowGridProps) {
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-4 gap-2">
       {SHOWS.map(({ name, emoji }) => {
         const isSelected = selected === name;
         return (
@@ -27,10 +26,10 @@ export default function ShowGrid({ selected, onSelect }: ShowGridProps) {
             key={name}
             onClick={() => onSelect(name)}
             className={`
-              flex flex-col items-center gap-1.5 rounded-xl px-3 py-4 text-center transition-all cursor-pointer border-2
+              flex flex-col items-center gap-1.5 rounded-2xl px-2 py-4 text-center transition-all cursor-pointer border-2
               ${isSelected
-                ? "border-[#C8820A] bg-amber-50 text-[#1A1208]"
-                : "border-[#EDE5D8] bg-white text-[#7A6040] hover:border-[#C8820A]/40"
+                ? "border-[#FFCC00] bg-[#FFCC00]/15 text-white shadow-[0_0_12px_rgba(255,204,0,0.4)]"
+                : "border-white/10 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10"
               }
             `}
           >
