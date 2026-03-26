@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -17,6 +17,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "That One Episode",
   description: "Find the episode your kid is asking for",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

@@ -26,10 +26,12 @@ export default function ShowGrid({ selected, onSelect }: ShowGridProps) {
             key={name}
             onClick={() => onSelect(name)}
             className={`
-              flex flex-col items-center gap-1.5 rounded-2xl px-2 py-4 text-center transition-all cursor-pointer border-2
+              flex flex-col items-center justify-center gap-2 rounded-2xl px-2 py-5 text-center
+              cursor-pointer border-2 min-h-[80px] w-full
+              active:scale-95 transition-transform
               ${isSelected
-                ? "border-[#FFCC00] bg-[#FFCC00]/15 text-white shadow-[0_0_12px_rgba(255,204,0,0.4)]"
-                : "border-white/10 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10"
+                ? "border-[#FFCC00] bg-[#FFCC00]/15 text-white shadow-[0_0_12px_rgba(255,204,0,0.3)]"
+                : "border-white/10 bg-white/5 text-white/70"
               }
             `}
           >

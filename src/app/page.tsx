@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <div className="star-bg min-h-screen flex flex-col" style={{ background: "#0D1B2A" }}>
-      <main className="relative z-10 flex-1 w-full max-w-lg mx-auto px-4 pt-12 pb-8 flex flex-col gap-8">
+      <main className="relative z-10 flex-1 w-full max-w-lg mx-auto px-4 pt-10 pb-8 flex flex-col gap-7">
         {/* Header */}
         <div>
           <h1
