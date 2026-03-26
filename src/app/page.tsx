@@ -77,18 +77,18 @@ export default function Home() {
         <div>
           <h1
             className="text-3xl font-semibold mb-1 text-white"
-            style={{ fontFamily: "var(--font-fraunces)" }}
+            style={{ fontFamily: "var(--font-fredoka)" }}
           >
             That One Episode
           </h1>
-          <p className="text-sm text-white/50">
-            Describe the episode your kid is asking for — we&apos;ll find it.
+          <p className="text-sm text-white/70">
+            Describe the episode your kid is asking for, the way they&apos;re asking for it, and we&apos;ll find it for you.
           </p>
         </div>
 
         {/* Show picker */}
         <section>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/60">
             Pick a show
           </p>
           <ShowGrid selected={selectedShow} onSelect={handleShowSelect} />
@@ -96,7 +96,7 @@ export default function Home() {
 
         {/* Search */}
         <section>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/60">
             How does your kid describe the episode?
           </p>
           <SearchBar
@@ -120,7 +120,7 @@ export default function Home() {
         {/* Results */}
         {episodes !== null && !loading && (
           <section>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/60">
               {episodes.length > 0 ? `${episodes.length} match${episodes.length > 1 ? "es" : ""}` : "No matches"}
             </p>
             <EpisodeResults episodes={episodes} />

@@ -15,7 +15,13 @@ export async function POST(req: NextRequest) {
 
   const client = new Anthropic({ apiKey });
 
-  const prompt = `You are an expert on children's TV. Pick one well-loved episode of "${show}" that toddlers tend to adore — something rewatchable and joyful.
+  const seed = Math.random().toFixed(6);
+
+  const prompt = `You are an expert on children's TV. Pick one beloved episode of "${show}" that toddlers tend to adore — something rewatchable and joyful.
+
+Random seed for variety: ${seed}
+
+IMPORTANT: Do not default to Season 1 or the first episode. Use the seed above to vary your selection — pick from across all seasons of the show. Imagine a shortlist of 20 fan-favourite episodes and use the seed to select one at random. Each call should have a genuine chance of returning a different episode.
 
 Return exactly one episode as a JSON object with these fields:
 - season (number)

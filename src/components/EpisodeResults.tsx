@@ -32,7 +32,7 @@ export default function EpisodeResults({ episodes }: EpisodeResultsProps) {
           </div>
           <h3
             className="text-lg font-semibold text-white mb-1"
-            style={{ fontFamily: "var(--font-fraunces)" }}
+            style={{ fontFamily: "var(--font-fredoka)" }}
           >
             {ep.name}
           </h3>

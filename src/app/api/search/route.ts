@@ -15,8 +15,12 @@ export async function POST(req: NextRequest) {
 
   const client = new Anthropic({ apiKey });
 
-  const prompt = `You are an expert on children's TV. A parent is trying to find an episode of "${show}" based on this description from their toddler: "${query}"
+  const showContext = show === "Trash Truck"
+    ? `"Trash Truck" is a Netflix original animated kids show about a boy named Hank and his best friend, a large trash truck. They go on adventures together in their neighbourhood. Your training data on this show may be limited — do your best to return plausible episode matches based on what you know, and note any uncertainty in the reason field rather than returning nothing.`
+    : "";
 
+  const prompt = `You are an expert on children's TV. A parent is trying to find an episode of "${show}" based on this description from their toddler: "${query}"
+${showContext ? `\nContext about this show: ${showContext}\n` : ""}
 Return up to 3 matching episodes as a JSON array. Each episode must have exactly these fields:
 - season (number)
 - episode (number)

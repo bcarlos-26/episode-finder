@@ -5,10 +5,10 @@ const SHOWS = [
   { name: "Bluey", emoji: "🐶" },
   { name: "Peppa Pig", emoji: "🐷" },
   { name: "Daniel Tiger's Neighborhood", emoji: "🐯" },
-  { name: "Sesame Street", emoji: "🎭" },
+  { name: "Sesame Street", emoji: "🛤️" },
   { name: "Trash Truck", emoji: "🚛" },
   { name: "Llama Llama", emoji: "🦙" },
-  { name: "Hello Kitty and Friends", emoji: "🎀" },
+  { name: "Hello Kitty and Friends", emoji: "🐱" },
 ];
 
 interface ShowGridProps {
