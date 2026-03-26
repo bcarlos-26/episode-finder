@@ -1,14 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
 export async function POST(req: NextRequest) {
   const { show } = await req.json();
 
   if (!show) {
     return NextResponse.json({ error: "show is required" }, { status: 400 });
   }
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: "ANTHROPIC_API_KEY is not set on the server" }, { status: 500 });
+  }
+
+  const client = new Anthropic({ apiKey });
 
   const prompt = `You are an expert on children's TV. Pick one well-loved episode of "${show}" that toddlers tend to adore — something rewatchable and joyful.
 
