@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  font-size: 150%;
+}
+
 body {
   background: #0D1B2A;
   color: #F0F4FF;

@@ -66,7 +66,7 @@ export default function SearchBar({ disabled, loading, onSearch, onSurprise }: S
           placeholder={disabled ? "Pick a show above first" : `"the one with the alien" or "they go to the beach"`}
           rows={3}
           className="w-full rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-white placeholder:text-white/30 resize-none focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/50 disabled:opacity-30 disabled:cursor-not-allowed"
-          style={{ fontSize: "16px", paddingRight: speechSupported ? "52px" : "16px" }}
+          style={{ fontSize: "1rem", paddingRight: speechSupported ? "52px" : "16px" }}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
